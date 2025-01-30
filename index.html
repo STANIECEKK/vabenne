@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Va Bene - autentyczna włoska restauracja w Rabce Zdrój. Sprawdź nasze menu z prawdziwą pizzą neapolitańską.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1592861956120-e524fc739696?auto=format&fit=crop&w=1200&q=80">
+    <title>Va Bene | Włoska Restauracja</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #B22222;
+            --dark-brown: #3E2723;
+            --light-beige: #F5F5F5;
+            --gold: #C5A880;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light-beige);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            width: 70px;
+            height: auto;
+            transition: transform 0.3s;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--dark-brown);
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-brown);
+            font-weight: 500;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary-red);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                        url('https://images.unsplash.com/photo-1592861956120-e524fc739696?auto=format&fit=crop&w=1200&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 1rem;
+        }
+
+        .hero h1 {
+            color: white;
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+        }
+
+        .cta-button {
+            background: var(--primary-red);
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button:hover {
+            background: #9B1C1C;
+            transform: translateY(-2px);
+        }
+
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--dark-brown);
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 1rem auto;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+        }
+
+        .food-card {
+            grid-column: 1 / -1;
+        }
+
+        .menu-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .menu-card-content {
+            padding: 1.8rem;
+        }
+
+        .menu-card h3 {
+            color: var(--dark-brown);
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+        }
+
+        .price {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 1.3rem;
+            display: block;
+            margin-top: 1rem;
+        }
+
+        .about-section {
+            background: white;
+            padding: 4rem 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .about-text {
+            padding: 2rem;
+        }
+
+        .about-text h3 {
+            color: var(--dark-brown);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .contact-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .call-button {
+            display: inline-block;
+            background: var(--primary-red);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            margin: 1rem 0;
+            transition: all 0.3s;
+        }
+
+        .call-button:hover {
+            background: #9B1C1C;
+            transform: translateY(-2px);
+        }
+
+        .contact-details {
+            margin: 1.5rem 0;
+            line-height: 1.6;
+        }
+
+        .map {
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        footer {
+            background: var(--dark-brown);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--gold);
+            text-decoration: none;
+            margin: 0 1rem;
+            font-size: 1.2rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 600px;
+            margin: 5% auto;
+            position: relative;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #modal-body {
+            overflow-y: auto;
+            padding-right: 10px;
+            max-height: 65vh;
+        }
+
+        #modal-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #modal-body::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        #modal-body::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
+        .close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            }
+            .nav-links.active { display: flex; }
+            .hamburger { display: block; }
+            .hero h1 { font-size: 2.5rem; }
+            .about-content { grid-template-columns: 1fr; }
+            .about-image img { height: 300px; }
+            .contact-container { padding: 2rem; }
+            .modal-content {
+                width: 90%;
+                margin: 20% auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="logo.png" 
+                 alt="Logo" 
+                 class="logo"
+                 loading="lazy">
+            <button class="hamburger" aria-label="Menu mobilne">☰</button>
+            <div class="nav-links">
+                <a href="#home">Strona główna</a>
+                <a href="#menu">Menu</a>
+                <a href="#about">O nas</a>
+                <a href="#contact">Kontakt</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Autentyczna kuchnia włoska<br>w sercu Rabki</h1>
+            <button class="cta-button" onclick="smoothScroll('#menu')">Poznaj nasze menu</button>
+        </div>
+    </section>
+
+    <section class="section" id="menu">
+        <h2 class="section-title">Nasze Specjalności</h2>
+        <div class="menu-grid">
+            <div class="menu-card food-card" onclick="openMenu('food')">
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80" 
+                     alt="Dania główne"
+                     loading="lazy"
+                     decoding="async">
+                <div class="menu-card-content">
+                    <h3>Dania Główne</h3>
+                    <p>Przystawki • Zupy • Makarony • Pizza</p>
+                    <span class="price">Od 15zł</span>
+                </div>
+            </div>
+
+            <div class="menu-card" onclick="openMenu('hot-drinks')">
+                <img src="https://images.unsplash.com/photo-1512568400610-62da28bc8a13?auto=format&fit=crop&w=600&q=80" 
+                     alt="Napoje ciepłe"
+                     loading="lazy"
+                     decoding="async">
+                <div class="menu-card-content">
+                    <h3>Napoje Ciepłe</h3>
+                    <p>Kawy • Herbaty</p>
+                    <span class="price">Od 8zł</span>
+                </div>
+            </div>
+
+            <div class="menu-card" onclick="openMenu('cold-drinks')">
+                <img src="https://images.unsplash.com/photo-1554866585-cd94860890b7?auto=format&fit=crop&w=600&q=80" 
+                     alt="Napoje zimne"
+                     loading="lazy"
+                     decoding="async">
+                <div class="menu-card-content">
+                    <h3>Napoje Zimne</h3>
+                    <p>Cola • Soki • Wody</p>
+                    <span class="price">Od 7zł</span>
+                </div>
+            </div>
+
+            <div class="menu-card" onclick="openMenu('alcohol')">
+                <img src="https://alkohole.pl/blog/wp-content/uploads/2023/11/louis-hansel-7Mq6VuXqJAo-unsplash-1140x760.jpg" 
+                     alt="Alkohole"
+                     loading="lazy"
+                     decoding="async">
+                <div class="menu-card-content">
+                    <h3>Alkohole</h3>
+                    <p>Wina • Piwa • Likiery</p>
+                    <span class="price">Od 12zł</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="zdj1.jpg" 
+                     alt="Wnętrze"
+                     loading="lazy"
+                     decoding="async">
+            </div>
+            <div class="gallery-item">
+                <img src="zdj3.jpg" 
+                     alt="Jedzenie"
+                     loading="lazy"
+                     decoding="async">
+            </div>
+            <div class="gallery-item">
+                <img src="zdj2.jpg" 
+                     alt="Pizza"
+                     loading="lazy"
+                     decoding="async">
+            </div>
+            <div class="gallery-item">
+                <img src="zdj4.jpg" 
+                     alt="Makaron"
+                     loading="lazy"
+                     decoding="async">
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="section">
+            <h2 class="section-title">Nasza Historia</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Kulinarna podróż przez Włochy</h3>
+                    <p>Założona w 2010 roku przez rodowitego Sycylijczyka, Marco Vitale, Va Bene to owoc wielopokoleniowej tradycji kulinarnej.</p>
+                    
+                    <h3>Najwyższa jakość</h3>
+                    <ul class="quality-list">
+                        <p>✔️ Mąka typu 00 z Neapolu</p> 
+                        <p>✔️ Pomidory San Marzano DOP</p>
+                        <p>✔️ Oliwa z oliwek z Toskanii</p>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=600&q=80" 
+                         alt="Wnętrze restauracji"
+                         loading="lazy"
+                         decoding="async">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <div class="contact-container">
+            <h2 class="section-title">Kontakt</h2>
+            <a href="tel:+48123456789" class="call-button">Zadzwoń do nas</a>
+            <div class="contact-details">
+                <p>📍 ul. Sądecka 1A, Rabka Zdrój</p>
+                <p>🕒 Godziny otwarcia:</p>
+                <p>Wtorek-Piątek 11:00-22:00</p>
+                <p>Sobota 14-22</p>
+                <p>Niedziela 13-21</p>
+            </div>
+            <div class="map">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d228.51369300722226!2d19.946911674241896!3d49.61024518618916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47160bd3d3184971%3A0xffa3e41450793ccf!2sVa%20Bene%20Rabka!5e0!3m2!1spl!2spl!4v1738273987343!5m2!1spl!2spl" 
+                    style="border:0; width:100%; height:100%; border-radius:12px;"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div itemscope itemtype="https://schema.org/Restaurant">
+            <p itemprop="name">© 2025 Va Bene | Prawdziwy smak Włoch</p>
+            <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                <span itemprop="streetAddress">ul. Sądecka 1A</span>,
+                <span itemprop="addressLocality">Rabka Zdrój</span>
+            </div>
+        </div>
+        <div class="social-links">
+            <a href="https://www.facebook.com/people/Va-Bene-Rabka/61568501265601/">Facebook</a>
+            <a href="https://www.instagram.com/va_bene_rabka?igsh=NjQ3Y3B4ZDQyYTRp">Instagram</a>
+            <a href="https://g.co/kgs/cgdV8RG">Google Opinie</a>
+        </div>
+    </footer>
+
+    <div id="menuModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.hamburger').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        const menuData = {
+            'food': {
+                'Przystawki': [
+                    {name: 'Bruschetta', price: '15zł', desc: 'Świeże pomidory, czosnek, bazylia'},
+                    {name: 'Carpaccio', price: '22zł', desc: 'Cienko krojona wołowina z rukolą i parmezanem'}
+                ],
+                'Zupy': [
+                    {name: 'Zupa dnia', price: '12zł', desc: 'Codziennie nowa propozycja'},
+                    {name: 'Minestrone', price: '14zł', desc: 'Tradycyjna włoska zupa warzywna'}
+                ],
+                'Makarony': [
+                    {name: 'Spaghetti Carbonara', price: '28zł', desc: 'Klasyczna wersja z guanciale'},
+                    {name: 'Penne Arrabbiata', price: '26zł', desc: 'Ostra wersja z papryczkami chili'}
+                ],
+                'Pizza': [
+                    {name: 'Margherita', price: '30zł', desc: 'Sos pomidorowy, mozzarella, bazylia'},
+                    {name: 'Diavola', price: '34zł', desc: 'Salami picante, papryczki chili'}
+                ]
+            },
+            'hot-drinks': [
+                {name: 'Espresso', price: '8zł'},
+                {name: 'Cappuccino', price: '12zł'},
+                {name: 'Herbata Zimowa', price: '15zł'}
+            ],
+            'cold-drinks': [
+                {name: 'Coca-Cola 250ml', price: '9zł'},
+                {name: 'San Pellegrino', price: '14zł'}
+            ],
+            'alcohol': [
+                {name: 'Chianti Classico', price: '25zł/150ml'},
+                {name: 'Limoncello', price: '20zł/60ml'}
+            ]
+        };
+
+        function smoothScroll(target) {
+            const element = document.querySelector(target);
+            window.scrollTo({
+                top: element.offsetTop - 100,
+                behavior: 'smooth'
+            });
+        }
+
+        function openMenu(category) {
+            const modal = document.getElementById('menuModal');
+            const body = document.getElementById('modal-body');
+            
+            let content = '';
+            if(category === 'food') {
+                for(const subcategory in menuData[category]) {
+                    content += `
+                        <div style="margin-bottom: 2rem;">
+                            <h3 style="color: var(--dark-brown); border-bottom: 2px solid var(--gold); padding-bottom: 0.5rem; margin-bottom: 1rem;">
+                                ${subcategory}
+                            </h3>
+                            ${menuData[category][subcategory].map(item => `
+                                <div style="padding: 1rem; border-bottom: 1px solid #eee;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div>
+                                            <h3 style="color: var(--dark-brown); margin: 0;">${item.name}</h3>
+                                            ${item.desc ? `<p style="color: #666; margin-top: 0.5rem;">${item.desc}</p>` : ''}
+                                        </div>
+                                        <span style="color: var(--gold); font-weight: bold; min-width: 80px; text-align: right;">${item.price}</span>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+            } else {
+                content = menuData[category].map(item => `
+                    <div style="padding: 1rem; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h3 style="color: var(--dark-brown); margin: 0;">${item.name}</h3>
+                                ${item.desc ? `<p style="color: #666; margin-top: 0.5rem;">${item.desc}</p>` : ''}
+                            </div>
+                            <span style="color: var(--gold); font-weight: bold; min-width: 80px; text-align: right;">${item.price}</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            body.innerHTML = `
+                <h2 style="color: var(--primary-red); margin-bottom: 2rem; border-bottom: 2px solid var(--gold); padding-bottom: 1rem; position: sticky; top: 0; background: white; z-index: 1;">
+                    ${category === 'food' ? 'Dania Główne' : category.toUpperCase()}
+                </h2>
+                ${content}
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('menuModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('menuModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

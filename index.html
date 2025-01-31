@@ -431,7 +431,7 @@
     <section class="section" id="menu">
         <h2 class="section-title">Nasze Specjalności</h2>
         <div class="menu-grid">
-            <div class="menu-card food-card" onclick="openMenu('Dania-Główne')">
+            <div class="menu-card food-card" onclick="openMenu('food')">
                 <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80" 
                      alt="Dania główne"
                      loading="lazy"
@@ -443,7 +443,7 @@
                 </div>
             </div>
 
-            <div class="menu-card" onclick="openMenu('Ciepłe Napoje')">
+            <div class="menu-card" onclick="openMenu('hot-drinks')">
                 <img src="https://images.unsplash.com/photo-1512568400610-62da28bc8a13?auto=format&fit=crop&w=600&q=80" 
                      alt="Napoje ciepłe"
                      loading="lazy"
@@ -455,7 +455,7 @@
                 </div>
             </div>
 
-            <div class="menu-card" onclick="openMenu('Zimne Napoje')">
+            <div class="menu-card" onclick="openMenu('cold-drinks')">
                 <img src="https://images.unsplash.com/photo-1554866585-cd94860890b7?auto=format&fit=crop&w=600&q=80" 
                      alt="Napoje zimne"
                      loading="lazy"
@@ -467,7 +467,7 @@
                 </div>
             </div>
 
-            <div class="menu-card" onclick="openMenu('Alkohole')">
+            <div class="menu-card" onclick="openMenu('alcohol')">
                 <img src="https://alkohole.pl/blog/wp-content/uploads/2023/11/louis-hansel-7Mq6VuXqJAo-unsplash-1140x760.jpg" 
                      alt="Alkohole"
                      loading="lazy"
@@ -583,7 +583,7 @@
         });
 
         const menuData = {
-            'Dania-Główne': {
+            'food': {
                 'Przystawki': [
                     {name: 'Bruschetta', price: '15zł', desc: 'Świeże pomidory, czosnek, bazylia'},
                     {name: 'Carpaccio', price: '22zł', desc: 'Cienko krojona wołowina z rukolą i parmezanem'}
@@ -601,16 +601,16 @@
                     {name: 'Diavola', price: '34zł', desc: 'Salami picante, papryczki chili'}
                 ]
             },
-            'Ciepłe Napoje': [
+            'hot-drinks': [
                 {name: 'Espresso', price: '8zł'},
                 {name: 'Cappuccino', price: '12zł'},
                 {name: 'Herbata Zimowa', price: '15zł'}
             ],
-            'Zimne Napoje': [
+            'cold-drinks': [
                 {name: 'Coca-Cola 250ml', price: '9zł'},
                 {name: 'San Pellegrino', price: '14zł'}
             ],
-            'Alkohole': [
+            'alcohol': [
                 {name: 'Chianti Classico', price: '25zł/150ml'},
                 {name: 'Limoncello', price: '20zł/60ml'}
             ]
@@ -666,7 +666,7 @@
 
             body.innerHTML = `
                 <h2 style="color: var(--primary-red); margin-bottom: 2rem; border-bottom: 2px solid var(--gold); padding-bottom: 1rem; position: sticky; top: 0; background: white; z-index: 1;">
-                    ${category === 'food' ? 'Dania-Główne' : category.toUpperCase()}
+                    ${category === 'food' ? 'Dania Główne' : category.toUpperCase()}
                 </h2>
                 ${content}
             `;
